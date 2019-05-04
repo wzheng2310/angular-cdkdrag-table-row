@@ -1,8 +1,5 @@
   <h2>Table</h2>
-  <table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8"
-  cdkDropList
-  [cdkDropListData]="dataSource"
-  (cdkDropListDropped)="dropTable($event)">
+  <table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -34,5 +31,9 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag [cdkDragData]="row"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      cdkDropList
+      [cdkDropListData]="dataSource"
+      (cdkDropListDropped)="dropTable($event)"
+      cdkDrag [cdkDragData]="row"></tr>
 </table>

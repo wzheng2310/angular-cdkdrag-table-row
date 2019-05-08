@@ -32,6 +32,7 @@ export class DragTableComponent  {
 
   ngAfterViewChecked() {
     /*
+    Workaround: Uncomment this and the error is gone.
     if (this.firstTime) {
       this.ref.detectChanges();
       this.firstTime = false;

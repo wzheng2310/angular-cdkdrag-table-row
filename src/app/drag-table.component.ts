@@ -1,5 +1,4 @@
-import { Component, ViewChild, ContentChildren, QueryList, forwardRef
- } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
 import {CdkDragDrop, moveItemInArray, transferArrayItem, CdkDragHandle} from '@angular/cdk/drag-drop';
@@ -27,7 +26,18 @@ export class DragTableComponent  {
   @ViewChild('table') table: MatTable<PeriodicElement>;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
-  
+  private firstTime = true;
+
+  constructor(private ref: ChangeDetectorRef) {}
+
+  ngAfterViewChecked() {
+    /*
+    if (this.firstTime) {
+      this.ref.detectChanges();
+      this.firstTime = false;
+    }
+    */
+  } 
   dropTable(event: CdkDragDrop<PeriodicElement[]>) {
     const prevIndex = this.dataSource.findIndex((d) => d === event.item.data);
     moveItemInArray(this.dataSource, prevIndex, event.currentIndex);
